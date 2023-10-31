@@ -58,3 +58,7 @@ button:active {
 #zero {
 	grid-column: 2;
 }
+
+#clear {
+	background-color: red;
+}

@@ -59,7 +59,10 @@ keys.forEach(key => {
 		e.preventDefault()
 		if (e.target.classList.contains('number')) {
 			displayString += e.target.textContent
-		} else if (e.target.classList.contains('operator')) {
+		} else if (
+			e.target.classList.contains('operator') &&
+			e.target.textContent !== '='
+		) {
 			showAnswer()
 			displayString += ` ${e.target.textContent} `
 		}

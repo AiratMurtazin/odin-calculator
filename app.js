@@ -21,8 +21,11 @@ const seven = document.getElementById('seven')
 const eight = document.getElementById('eight')
 const nine = document.getElementById('nine')
 const zero = document.getElementById('zero')
+const number = document.querySelector('.number')
+const oper = document.querySelector('.operator')
 let displayString = ''
 let displayArray = []
+let clicked = false
 // let operator = ''
 let onlyNumbersRegEx = /^\d+$/
 // FUNCTIONS
@@ -53,7 +56,29 @@ function operator(num1, operator, num2) {
 			break
 		case '/':
 			return divide(num1, num2)
-		default:
-			console.log('Do your calculations!')
 	}
 }
+
+function showAnswer() {
+	displayArray = displayString.split(' ')
+	let answer = operator(+displayArray[0], displayArray[1], +displayArray[2])
+	if (answer) {
+		displayString = ''
+		displayString += answer
+	}
+	display.value = displayString
+}
+
+keys.forEach(key => {
+	key.addEventListener('click', e => {
+		e.preventDefault()
+		if (e.target.classList.contains('number')) {
+			displayString += e.target.textContent
+		} else if (e.target.classList.contains('operator')) {
+			showAnswer()
+			displayString += ` ${e.target.textContent} `
+		}
+	})
+})
+
+equals.addEventListener('click', showAnswer)
